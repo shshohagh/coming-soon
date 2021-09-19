@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Coming soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bgimg {
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+hr {
+  margin: auto;
+  width: 40%;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg">
+  <div class="topleft">
+    <p class="spinner-grow text-muted" id="domain"></p>
+  </div> 
+  <div class="middle">
+    <h1>COMING SOON</h1>
+    <hr>
+    <p class="spinner-border text-muted" id="date" style="font-size:30px"></p>
+  </div>
+  <div class="bottomleft">
+    <p class="spinner-grow text-muted" id="time"></p>
+  </div>
+</div>
+
+<script>
+// Set domain name
+document.getElementById("domain").innerHTML = window.location.hostname;
+document.getElementById("domain").classList.remove("spinner-grow");
+document.getElementById("domain").classList.remove("text-muted");
+// Set the date we're counting down to
+var date="Oct 1, 2021 10:00:00"; 
+var countDownDate = new Date(date).getTime();
+
+// Update the count down every 1 second
+var countdownfunction = setInterval(function() {
+  // Get todays date and time
+  var now = new Date().getTime();
+  
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+  
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  // Output the result in an element with id="demo"
+  document.getElementById("date").innerHTML = days + "d " + hours + "h "
+  // Remove Class
+  + minutes + "m " + seconds + "s ";
+  document.getElementById("date").classList.remove("spinner-border");
+  document.getElementById("date").classList.remove("text-muted");
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(countdownfunction);
+    document.getElementById("date").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+setInterval(myTimer, 1000);
+function myTimer() {
+  const d = new Date();
+  document.getElementById("time").innerHTML = d.toLocaleTimeString();
+  document.getElementById("time").classList.remove("spinner-grow");
+  document.getElementById("time").classList.remove("text-muted");
+}
+
+</script>
+
+</body>
+</html>
